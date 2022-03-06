@@ -1,6 +1,7 @@
 package com.example.PP_311_SpringBoot.service;
 
 import com.example.PP_311_SpringBoot.dao.UserDao;
+import com.example.PP_311_SpringBoot.model.Role;
 import com.example.PP_311_SpringBoot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +16,24 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public List<User> index() {
-        return userDao.index();
+        return userDao.getAll();
     }
 
     @Transactional
     @Override
     public User show(Long id) {
-        return userDao.show(id);
+        return userDao.getById(id);
     }
 
     @Transactional
     @Override
     public void save(User user) {
         userDao.save(user);
+    }
+
+    @Override
+    public void save(User user, String[] roles) {
+        userDao.save(user, roles);
     }
 
     @Transactional

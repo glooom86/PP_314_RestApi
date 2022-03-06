@@ -1,16 +1,15 @@
 package com.example.PP_311_SpringBoot.dao;
 
-
 import com.example.PP_311_SpringBoot.model.Role;
 import com.example.PP_311_SpringBoot.model.User;
 
 import java.util.List;
 
-public interface UserDao {
-    List<User> getAll();
-    User getById(Long id);
-    void save(User user);
-    void save(User user, String[] roles);
-    void update(User updatedUser);
+
+public interface RoleDao {
+    List<Role> getAll();
+    Role getById(Long id);
+    Role getByName(String name);
+    void save(Role role);
     void deleteById(Long id);
 }

@@ -1,6 +1,7 @@
 package com.example.PP_311_SpringBoot.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -19,13 +20,20 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
     public User(){}
 
-    public User(Long id, String name, String lastName, String email) {
-        this.id = id;
+    public User(String name, String lastName, String email, Set<Role> roles) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -58,5 +66,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
