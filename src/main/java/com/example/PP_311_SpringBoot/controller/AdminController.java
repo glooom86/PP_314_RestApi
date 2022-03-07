@@ -12,20 +12,21 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class UsersController {
+@RequestMapping("admin")
+public class AdminController {
 
     private final UserService userService;
     private final RoleService roleService;
     private final UserConverter userConverter;
 
     @Autowired
-    public UsersController(UserService userService, RoleService roleService, UserConverter userConverter) {
+    public AdminController(UserService userService, RoleService roleService, UserConverter userConverter) {
         this.userService = userService;
         this.roleService = roleService;
         this.userConverter = userConverter;
     }
 
-    @GetMapping("/users")
+    @GetMapping()
     public String index(Model model) {
         model.addAttribute("users", userService.getAll());
         return "index";
@@ -48,7 +49,7 @@ public class UsersController {
     public String create(@ModelAttribute("user") UserData userData) {
         User user = userConverter.convert(userData);
         userService.save(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
     @GetMapping("users/{id}/edit")
@@ -64,12 +65,12 @@ public class UsersController {
         User user = userConverter.convert(userData);
         user.setId(id);
         userService.update(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("users/{id}")
     public String delete(@PathVariable("id") Long id) {
         userService.deleteById(id);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 }

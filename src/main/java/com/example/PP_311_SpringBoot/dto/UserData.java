@@ -1,6 +1,5 @@
 package com.example.PP_311_SpringBoot.dto;
 
-
 import java.util.List;
 
 public class UserData {
@@ -8,14 +7,16 @@ public class UserData {
     private String name;
     private String lastName;
     private String email;
+    private String password;
     private List<String> roles;
 
     public UserData(){}
 
-    public UserData(String name, String lastName, String email) {
+    public UserData(String name, String lastName, String password, String email) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
     public String getName() {
@@ -42,6 +43,14 @@ public class UserData {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public List<String> getRoles() {
         return roles;
     }
@@ -49,4 +58,6 @@ public class UserData {
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }
+
+
 }

@@ -18,6 +18,7 @@ public class UserConverter {
         user.setName(userData.getName());
         user.setLastName(userData.getLastName());
         user.setEmail(userData.getEmail());
+        user.setPassword(userData.getPassword());
         user.setRoles(roleService.getByName(userData.getRoles()));
         return user;
     }

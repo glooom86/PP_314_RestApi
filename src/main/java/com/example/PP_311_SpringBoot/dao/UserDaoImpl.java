@@ -1,6 +1,5 @@
 package com.example.PP_311_SpringBoot.dao;
 
-import com.example.PP_311_SpringBoot.model.Role;
 import com.example.PP_311_SpringBoot.model.User;
 import com.example.PP_311_SpringBoot.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +51,13 @@ public class UserDaoImpl implements UserDao {
         if(user != null) {
             em.remove(user);
         }
+    }
+
+    @Override
+    public User getByName(String name) {
+        TypedQuery<User> query = em
+                .createQuery("select u from User u WHERE u.name =:name", User.class);
+        query.setParameter("name", name);
+        return query.getSingleResult();
     }
 }

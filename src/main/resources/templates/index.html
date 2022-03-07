@@ -7,15 +7,56 @@
 </head>
 <body>
 
-<div th:each="user : ${users}">
-    <a th:href="@{/users/{id}(id=${user.getId()})}"
-       th:text="${user.getName() + ' ' + user.getLastName()}">user</a>
-</div>
+<h2>Admin panel</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>User name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Roles</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+<!--    <tr th:if="${books.empty}">-->
+<!--        <td colspan="2"> No Books Available </td>-->
+<!--    </tr>-->
+    <tr th:each="user : ${users}">
+        <td><span th:text="${user.name}"> Name </span></td>
+        <td><span th:text="${user.lastName}"> Lastname </span></td>
+        <td><span th:text="${user.email}"> Email </span></td>
+        <td><span th:text="${user.password}"> Password </span> </td>
+        <td><div th:each="role : ${user.getRoles()}">
+            <a th:text="${role.getName()}">user</a>
+        </div></td>
+        <td><form th:method="GET" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}">
+            <input type="submit" value="Edit"/>
+        </form></td>
+        <td><form th:method="DELETE" th:action="@{/admin/users/{id}(id=${user.getId()})}">
+            <input type="submit" value="Delete"/>
+        </form></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!--<a th:href="@{admin/users/{id}/edit(id=${user.getId()})}">Edit</a>-->
+
+<!--<form th:method="DELETE" th:action="@{admin/users/{id}(id=${user.getId()})}">-->
+<!--    <input type="submit" value="Delete"/>-->
+<!--</form>-->
 
 <br/>
 <hr/>
 
-<a href="/users/new">Add new user</a>
+<a href="/admin/users/new">Add new user</a>
 
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="false">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>

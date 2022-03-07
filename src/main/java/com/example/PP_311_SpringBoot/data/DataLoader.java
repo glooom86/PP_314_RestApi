@@ -31,8 +31,8 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private void saveUser(){
-        User user1 = new User("Vasya","Ivanov","email", List.of(roleService.getById(1L)));
-        User user2 = new User("Petya", "Petrov", "email", List.of(roleService.getById(2L)));
+        User user1 = new User("admin","Ivanov","admin","email", List.of(roleService.getById(1L)));
+        User user2 = new User("user", "Ara", "user", "email", List.of(roleService.getById(2L)));
         userService.save(user1);
         userService.save(user2);
     }

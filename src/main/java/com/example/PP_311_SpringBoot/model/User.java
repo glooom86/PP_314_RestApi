@@ -1,11 +1,15 @@
 package com.example.PP_311_SpringBoot.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +20,9 @@ public class User {
 
     @Column(name = "lastName")
     private String lastName;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "email")
     private String email;
@@ -29,11 +36,16 @@ public class User {
 
     public User(){}
 
-    public User(String name, String lastName, String email, List<Role> roles) {
+    public User(String name, String lastName, String password, String email, List<Role> roles) {
         this.name = name;
         this.lastName = lastName;
+        this.password = password;
         this.email = email;
         this.roles = roles;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {
@@ -78,5 +90,40 @@ public class User {
 
     public boolean hasRole (Role role) {
         return roles.contains(role);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
