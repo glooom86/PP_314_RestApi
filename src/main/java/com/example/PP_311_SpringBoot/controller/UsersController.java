@@ -16,21 +16,20 @@ public class UsersController {
     private final RoleService roleService;
 
     @Autowired
-    public UsersController(UserService userService,
-                           RoleService roleService) {
+    public UsersController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
     @GetMapping("/users")
     public String index(Model model) {
-        model.addAttribute("users", userService.index());
+        model.addAttribute("users", userService.getAll());
         return "index";
     }
 
     @GetMapping("users/{id}")
     public String show(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.show(id));
+        model.addAttribute("user", userService.getById(id));
         return "show";
     }
 
@@ -51,7 +50,7 @@ public class UsersController {
 
     @GetMapping("users/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.show(id));
+        model.addAttribute("user", userService.getById(id));
         return "edit";
     }
 

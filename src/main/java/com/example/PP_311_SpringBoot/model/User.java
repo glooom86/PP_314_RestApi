@@ -1,6 +1,7 @@
 package com.example.PP_311_SpringBoot.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,11 +26,11 @@ public class User {
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public User(){}
 
-    public User(String name, String lastName, String email, Set<Role> roles) {
+    public User(String name, String lastName, String email, List<Role> roles) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -68,11 +69,11 @@ public class User {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

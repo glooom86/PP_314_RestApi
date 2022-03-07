@@ -1,12 +1,11 @@
 package com.example.PP_311_SpringBoot.dao;
 
 import com.example.PP_311_SpringBoot.model.User;
+import com.example.PP_311_SpringBoot.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Repository
@@ -16,7 +15,7 @@ public class UserDaoImpl implements UserDao {
     private EntityManager em;
 
     @Autowired
-    private RoleDao roleDao;
+    private RoleService roleService;
 
     public UserDaoImpl(){}
 
@@ -29,9 +28,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void save(User user, String[] roles) {
         if (roles.length == 2) {
-            user.setRoles(new HashSet<>(roleDao.getAll()));
+            user.setRoles(roleService.getAll());
         } else {
-            user.setRoles(Set.of(roleDao.getByName(roles[0])));
+            user.setRoles(List.of(roleService.getByName(roles[0])));
         }
         em.persist(user);
     }

@@ -1,7 +1,6 @@
 package com.example.PP_311_SpringBoot.dao;
 
 import com.example.PP_311_SpringBoot.model.Role;
-import com.example.PP_311_SpringBoot.model.User;
 
 import java.util.List;
 

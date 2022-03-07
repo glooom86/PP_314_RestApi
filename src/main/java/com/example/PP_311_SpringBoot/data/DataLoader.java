@@ -9,7 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
+import java.util.List;
 
 @Component
 public class DataLoader implements ApplicationRunner {
@@ -31,8 +31,8 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private void saveUser(){
-        User user1 = new User("Vasya","Ivanov","email",Set.of(roleService.getById(1L)));
-        User user2 = new User("Petya", "Petrov", "email", Set.of(roleService.getById(2L)));
+        User user1 = new User("Vasya","Ivanov","email", List.of(roleService.getById(1L)));
+        User user2 = new User("Petya", "Petrov", "email", List.of(roleService.getById(2L)));
         userService.save(user1);
         userService.save(user2);
     }
