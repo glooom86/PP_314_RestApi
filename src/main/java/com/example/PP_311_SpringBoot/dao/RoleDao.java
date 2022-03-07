@@ -8,7 +8,7 @@ import java.util.List;
 public interface RoleDao {
     List<Role> getAll();
     Role getById(Long id);
-    Role getByName(String name);
+    List<Role> getByName(List<String> name);
     void save(Role role);
     void deleteById(Long id);
 }

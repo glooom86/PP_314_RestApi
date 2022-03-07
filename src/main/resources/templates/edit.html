@@ -17,8 +17,18 @@
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email">
     <br/>
+    <p>
+        <label>Roles:
+            <input th:type="checkbox" th:name="roleList"
+                   th:each="role : ${roleList}"
+                   th:checked="${user.hasRole(role)}"
+                   th:text="${role.name}"
+                   th:value="${role.name}"
+                   th:field="*{roles}"
+            />
+        </label>
+    </p>
     <input type="submit" value="Update"/>
-
 </form>
 
 </body>

@@ -2,7 +2,6 @@ package com.example.PP_311_SpringBoot.model;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -75,5 +74,9 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean hasRole (Role role) {
+        return roles.contains(role);
     }
 }

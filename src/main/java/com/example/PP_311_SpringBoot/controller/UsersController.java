@@ -1,5 +1,7 @@
 package com.example.PP_311_SpringBoot.controller;
 
+import com.example.PP_311_SpringBoot.converter.UserConverter;
+import com.example.PP_311_SpringBoot.dto.UserData;
 import com.example.PP_311_SpringBoot.model.User;
 import com.example.PP_311_SpringBoot.service.RoleService;
 import com.example.PP_311_SpringBoot.service.UserService;
@@ -14,11 +16,13 @@ public class UsersController {
 
     private final UserService userService;
     private final RoleService roleService;
+    private final UserConverter userConverter;
 
     @Autowired
-    public UsersController(UserService userService, RoleService roleService) {
+    public UsersController(UserService userService, RoleService roleService, UserConverter userConverter) {
         this.userService = userService;
         this.roleService = roleService;
+        this.userConverter = userConverter;
     }
 
     @GetMapping("/users")
@@ -41,21 +45,24 @@ public class UsersController {
     }
 
     @PostMapping("users")
-    public String create(@ModelAttribute("user") User user,
-                                @RequestParam("roles") String[] roleList) {
-
-        userService.save(user, roleList);
+    public String create(@ModelAttribute("user") UserData userData) {
+        User user = userConverter.convert(userData);
+        userService.save(user);
         return "redirect:/users";
     }
 
     @GetMapping("users/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getById(id));
+        model.addAttribute("roleList", roleService.getAll());
         return "edit";
     }
 
     @PatchMapping("users/{id}")
-    public String update(@ModelAttribute("user") User user) {
+    public String update(@ModelAttribute("user") UserData userData,
+                         @PathVariable("id") Long id) {
+        User user = userConverter.convert(userData);
+        user.setId(id);
         userService.update(user);
         return "redirect:/users";
     }

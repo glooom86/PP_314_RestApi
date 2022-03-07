@@ -1,5 +1,6 @@
 package com.example.PP_311_SpringBoot.dao;
 
+import com.example.PP_311_SpringBoot.model.Role;
 import com.example.PP_311_SpringBoot.model.User;
 import com.example.PP_311_SpringBoot.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(User user) {
-        em.persist(user);
-    }
-
-    @Override
-    public void save(User user, String[] roles) {
-        if (roles.length == 2) {
-            user.setRoles(roleService.getAll());
-        } else {
-            user.setRoles(List.of(roleService.getByName(roles[0])));
-        }
         em.persist(user);
     }
 
