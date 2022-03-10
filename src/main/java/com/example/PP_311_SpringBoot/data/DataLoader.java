@@ -24,15 +24,15 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private void saveRole(){
-        Role roleAdmin = new Role(1L, "ROLE_ADMIN");
-        Role roleUser = new Role(2L, "ROLE_USER");
+        Role roleAdmin = new Role("ROLE_ADMIN", "ADMIN");
+        Role roleUser = new Role( "ROLE_USER", "USER");
         roleService.save(roleAdmin);
         roleService.save(roleUser);
     }
 
     private void saveUser(){
-        User user1 = new User("admin","Ivanov","admin","email", List.of(roleService.getById(1L)));
-        User user2 = new User("user", "Ara", "user", "email", List.of(roleService.getById(2L)));
+        User user1 = new User("admin","Ivanov","admin","admin@mail.ru", List.of(roleService.getById(1L)));
+        User user2 = new User("user", "Ara", "user", "user@mail.ru", List.of(roleService.getById(2L)));
         userService.save(user1);
         userService.save(user2);
     }

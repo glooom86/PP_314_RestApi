@@ -23,7 +23,7 @@ public class UserController {
     public String showUser(Principal principal, ModelMap modelMap) {
         User userBd = userService.getByName(principal.getName());
         modelMap.addAttribute("user", userBd);
-        return "show";
+        return "user";
     }
 
 

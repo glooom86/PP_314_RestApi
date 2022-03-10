@@ -88,8 +88,29 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public boolean hasRole (Role role) {
+    public boolean isAdmin() {
+        if (roles == null) {
+            return false;
+        }
+        return roles.stream().anyMatch(p -> p.getName().equals("ROLE_ADMIN"));
+    }
+
+    public boolean hasRole(Role role) {
+        if (roles == null) {
+            return false;
+        }
         return roles.contains(role);
+    }
+
+    public String getRolesTitle() {
+        String result = "";
+        for (Role role : roles) {
+            if (result != "") {
+                result = result.concat(", ");
+            }
+            result = result.concat(role.getTitle());
+        }
+        return result;
     }
 
     @Override
