@@ -1,14 +1,14 @@
 package com.example.PP_311_SpringBoot.dao;
 
 import com.example.PP_311_SpringBoot.model.Role;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Component
+@Repository
 public class RoleDaoImpl implements RoleDao{
 
     @PersistenceContext
