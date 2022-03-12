@@ -7,6 +7,7 @@ import com.example.PP_311_SpringBoot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class DataLoader implements ApplicationRunner {
 
     private RoleService roleService;
     private UserService userService;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public DataLoader(RoleService roleService, UserService userService) {
@@ -31,7 +33,7 @@ public class DataLoader implements ApplicationRunner {
     }
 
     private void saveUser(){
-        User user1 = new User("admin","Ivanov","admin","admin@mail.ru", List.of(roleService.getById(1L)));
+        User user1 = new User("admin","Ivanov", "admin","admin@mail.ru", List.of(roleService.getById(1L)));
         User user2 = new User("user", "Ara", "user", "user@mail.ru", List.of(roleService.getById(2L)));
         userService.save(user1);
         userService.save(user2);

@@ -37,7 +37,6 @@ const createUserListRow = (user) => {
         <td><span>${user.name}</span></td>
         <td><span>${user.lastName}</span></td>
         <td><span>${user.email}</span></td>
-        <td><span>${user.password}</span></td>
         <td>
             <div>
                 ${user.roles.map(role => role.title).join(", ")}
@@ -52,7 +51,6 @@ const createUserListRow = (user) => {
         </td>
         <td>
             <div>
-
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-action="delete" data-user-id="${user.id}">
                     Delete
                 </button>
@@ -129,7 +127,7 @@ const fillForm = (user, form ) => {
     form.find('[name="name"]').val(user.name);
     form.find('[name="lastName"]').val(user.lastName);
     form.find('[name="email"]').val(user.email);
-    form.find('[name="password"]').val(user.password);
+    // form.find('[name="password"]').val(user.password);
     form.find('[name="roles"]').val(user.roles.map(role => role.name));
 }
 
@@ -149,4 +147,3 @@ const getDataFromForm = (form) => {
     });
     return data;
 }
-
